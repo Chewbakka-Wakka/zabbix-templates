@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.4</version>
-  <date>2017-12-07T11:22:38Z</date>
+  <date>2018-07-04T00:05:37Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -13,11 +13,11 @@
       <name>Service Zabbix Server</name>
       <description>Base Zabbix server monitoring template.&#13;
 &#13;
-Version: 1.0.1 (2017-09-09)&#13;
+Version: 1.0.4 (2018-06-11)&#13;
 URL: https://github.com/kloczek/zabbix-templates/tree/master/Service%20Zabbix%20Server&#13;
 &#13;
 Notes:&#13;
-* Host with this template needs to monitored without any proxy.</description>
+* Host with this template must be monitored without any proxy.</description>
       <groups>
         <group>
           <name>Templates</name>
@@ -28,10 +28,28 @@ Notes:&#13;
           <name>SVC::Zabbix Server</name>
         </application>
         <application>
-          <name>SVC::Zabbix Server::process::busy</name>
+          <name>SVC::Zabbix Server::proc</name>
         </application>
         <application>
           <name>SVC::Zabbix Server::queue</name>
+        </application>
+        <application>
+          <name>SVC::Zabbix Server::rcache::buffer</name>
+        </application>
+        <application>
+          <name>SVC::Zabbix Server::vcache::buffer</name>
+        </application>
+        <application>
+          <name>SVC::Zabbix Server::vcache::cache</name>
+        </application>
+        <application>
+          <name>SVC::Zabbix Server::wcache::history</name>
+        </application>
+        <application>
+          <name>SVC::Zabbix Server::wcache::trend</name>
+        </application>
+        <application>
+          <name>SVC::Zabbix Server::wcache::values</name>
         </application>
       </applications>
       <items>
@@ -159,18 +177,18 @@ Notes:&#13;
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>queue::preprocessing</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"alerter",avg,busy]</key>
+          <key>zabbix[preprocessing_queue]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
           <status>0</status>
-          <value_type>0</value_type>
+          <value_type>3</value_type>
           <allowed_hosts/>
-          <units>%</units>
+          <units>items</units>
           <snmpv3_contextname/>
           <snmpv3_securityname/>
           <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -186,12 +204,11 @@ Notes:&#13;
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Average percent of the time of the "alerter" processes  is busy during the last minute.&#13;
-"alerter" process is sending alarms notifications.</description>
+          <description>Count of values enqueued in the preprocessing queue.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::queue</name>
             </application>
           </applications>
           <valuemap/>
@@ -201,11 +218,11 @@ Notes:&#13;
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"configuration syncer",avg,busy]</key>
+          <key>zabbix[process,alerter,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -228,12 +245,96 @@ Notes:&#13;
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Average percent of the time of the "configuration syncer" processes is busy during the last minute.&#13;
+          <description>Average percent of the time of the "alerter" processes are busy during the last minute.&#13;
+"alerter" processes are responsible for sending alarms notifications.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,alert manager,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "alert manager" process is busy during the last minute.&#13;
+"alert manager" process is managing alerts pool queue.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,configuration syncer,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "configuration syncer" process is busy during the last minute.&#13;
 "configuration syncer" process is for managing in-memory cache of configuration data.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -243,11 +344,11 @@ Notes:&#13;
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"discoverer",avg,busy]</key>
+          <key>zabbix[process,discoverer,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -270,11 +371,12 @@ Notes:&#13;
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "discoverer" process is busy during the last minute.&#13;
+"discoverer" process is responsible for discovery of the hosts.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -284,11 +386,11 @@ Notes:&#13;
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"history syncer",avg,busy]</key>
+          <key>zabbix[process,escalator,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -311,11 +413,12 @@ Notes:&#13;
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "escalator" process is busy during the last minute.&#13;
+"escalator" process is responsible for escalation of actions.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -325,11 +428,11 @@ Notes:&#13;
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"housekeeper",avg,busy]</key>
+          <key>zabbix[process,history syncer,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -352,12 +455,54 @@ Notes:&#13;
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Average percent of the time "housekeeper" processes which is responsible for removal of old historical data.&#13;
+          <description>Average percent of the time of the "history syncer" processes are busy during the last minute.&#13;
+"history syncer" processes are responsible for history data writing to DB backend.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,housekeeper,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time "housekeeper" process which is responsible for removal of old historical data.&#13;
 This metrics should have only two values 0 and 100% because it is only one housekeeper process. When it is 100% it means that housekeeper is active.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -367,11 +512,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"http poller",avg,busy]</key>
+          <key>zabbix[process,http poller,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -394,11 +539,12 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "http poller" processes are busy during the last minute.&#13;
+"http poller" processes are responsible for web monitoring polling.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -408,11 +554,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"icmp pinger",avg,busy]</key>
+          <key>zabbix[process,icmp pinger,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -435,11 +581,12 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "icmp pinger" processes are busy during the last minute.&#13;
+"icmp pinger" processes are responsible for polling icmpping checks..</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -449,11 +596,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"poller",avg,busy]</key>
+          <key>zabbix[process,ipmi manager,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -476,11 +623,12 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "ipmi manager" process is busy during the last minute.&#13;
+"ipmi manager" process is responsible for IPMI poller management.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -490,11 +638,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"proxy poller",avg,busy]</key>
+          <key>zabbix[process,ipmi poller,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -517,11 +665,12 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "ipmi poller" processes are busy during the last minute.&#13;
+"ipmi poller" processes are responsible for poller for IPMI checks.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -531,11 +680,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"self-monitoring",avg,busy]</key>
+          <key>zabbix[process,java poller,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -558,11 +707,12 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "java poller" processes are busy during the last minute.&#13;
+"java poller" processes are responsible for polling Java checks.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -572,11 +722,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"trapper",avg,busy]</key>
+          <key>zabbix[process,poller,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -599,11 +749,12 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "poller" processes are busy during the last minute.&#13;
+"poller" processes are responsible for polling for passive checks, calculate values of calculated items and zabbix server internal checks.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -613,11 +764,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>process::$4::$2 %</name>
+          <name>proc::$4::$2 %</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"unreachable poller",avg,busy]</key>
+          <key>zabbix[process,preprocessing manager,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -640,11 +791,390 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Average percent of the time of the "preprocessing manager" process is busy during the last minute.&#13;
+"preprocessing manager" process is responsible for managing of preprocessing tasks.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server::process::busy</name>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,preprocessing worker,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "preprocessing worker" processes are busy during the last minute.&#13;
+"preprocessing worker" processes are responsible for processing of all items preprocess rules.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,proxy poller,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "proxy poller" processes are busy during the last minute.&#13;
+"proxy poller" processes are responsible for polling for passive proxies.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,self-monitoring,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "self-monitoring" process is busy during the last minute.&#13;
+"self-monitoring" process is responsible for collecting internal server statistics.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,snmp trapper,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "snmp trapper" process is busy during the last minute.&#13;
+"snmp trapper" process is for receiving SNMP traps.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,task manager,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "task manager" process is busy during the last minute.&#13;
+"task manager" process is responsible for manually closing problems.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,timer,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "timer" process is busy during the last minute.&#13;
+"timer" process is responsible for evaluation of time-related trigger functions and maintenances.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,trapper,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "trapper" processes are busy during the last minute.&#13;
+"trapper" processes are responsible for receive data from active check items.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,unreachable poller,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "unreachable poller" processes are busy during the last minute.&#13;
+"unreachable poller" processes are responsible for polling unreachable hosts.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2 %</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,vmware collector,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "vmware collector" processes are busy during the last minute.&#13;
+"vmware collector" processes are responsible for data gathering from VMware servers.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -763,7 +1293,7 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Number of monitored items in the Queue which are delayed by 10 min or more.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
@@ -859,47 +1389,6 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>items::queued</name>
-          <type>5</type>
-          <snmp_community/>
-          <snmp_oid/>
-          <key>zabbix[queue]</key>
-          <delay>30s</delay>
-          <history>2w</history>
-          <trends>365d</trends>
-          <status>0</status>
-          <value_type>3</value_type>
-          <allowed_hosts/>
-          <units>items</units>
-          <snmpv3_contextname/>
-          <snmpv3_securityname/>
-          <snmpv3_securitylevel>0</snmpv3_securitylevel>
-          <snmpv3_authprotocol>0</snmpv3_authprotocol>
-          <snmpv3_authpassphrase/>
-          <snmpv3_privprotocol>0</snmpv3_privprotocol>
-          <snmpv3_privpassphrase/>
-          <params/>
-          <ipmi_sensor/>
-          <authtype>0</authtype>
-          <username/>
-          <password/>
-          <publickey/>
-          <privatekey/>
-          <port/>
-          <description/>
-          <inventory_link>0</inventory_link>
-          <applications>
-            <application>
-              <name>SVC::Zabbix Server</name>
-            </application>
-          </applications>
-          <valuemap/>
-          <logtimefmt/>
-          <preprocessing/>
-          <jmx_endpoint/>
-          <master_item/>
-        </item>
-        <item>
           <name>$1::$2::$3</name>
           <type>5</type>
           <snmp_community/>
@@ -927,11 +1416,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Size of Zabbix server configuration cache buffer free memory.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::rcache::buffer</name>
             </application>
           </applications>
           <valuemap/>
@@ -968,11 +1457,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Percent of Zabbix server configuration cache buffer free memory.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::rcache::buffer</name>
             </application>
           </applications>
           <valuemap/>
@@ -1009,11 +1498,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Size of Zabbix server configuration cache buffer used memory.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::rcache::buffer</name>
             </application>
           </applications>
           <valuemap/>
@@ -1034,7 +1523,7 @@ This metrics should have only two values 0 and 100% because it is only one house
           <status>0</status>
           <value_type>0</value_type>
           <allowed_hosts/>
-          <units>v/s</units>
+          <units>nvps</units>
           <snmpv3_contextname/>
           <snmpv3_securityname/>
           <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -1050,7 +1539,7 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Required performance of the Zabbix server or Zabbix proxy, in new values per second expected.</description>
+          <description>Required performance of the Zabbix server in new values per second expected.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
@@ -1064,7 +1553,48 @@ This metrics should have only two values 0 and 100% because it is only one house
           <master_item/>
         </item>
         <item>
-          <name>Uptime</name>
+          <name>$1</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[triggers]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <allowed_hosts/>
+          <units>triggers</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Number of enabled triggers in Zabbix database, with all items enabled on enabled hosts.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Server</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>$1</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
@@ -1132,11 +1662,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Percent of Zabbix server value cache free buffer.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::vcache::buffer</name>
             </application>
           </applications>
           <valuemap/>
@@ -1173,11 +1703,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Zabbix server number of cache hits (history values taken from the cache).</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::vcache::cache</name>
             </application>
           </applications>
           <valuemap/>
@@ -1219,11 +1749,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Zabbix server values cache misses (history values taken from the database).</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::vcache::cache</name>
             </application>
           </applications>
           <valuemap/>
@@ -1265,11 +1795,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Zabbix server values cache total number of requests.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::vcache::cache</name>
             </application>
           </applications>
           <valuemap/>
@@ -1312,12 +1842,11 @@ This metrics should have only two values 0 and 100% because it is only one house
           <privatekey/>
           <port/>
           <description>Size of free history cache.&#13;
-&#13;
 A low number indicates performance problems on the database side.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::history</name>
             </application>
           </applications>
           <valuemap/>
@@ -1354,13 +1883,12 @@ A low number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Percent of free history cache.&#13;
-&#13;
+          <description>History cache feree  used to store item values.&#13;
 A low number indicates performance problems on the database side.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::history</name>
             </application>
           </applications>
           <valuemap/>
@@ -1401,7 +1929,7 @@ A low number indicates performance problems on the database side.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::history</name>
             </application>
           </applications>
           <valuemap/>
@@ -1438,13 +1966,12 @@ A low number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Size of used history cache.&#13;
-&#13;
+          <description>The size of the history cache to store item values.&#13;
 A high number indicates performance problems on the database side.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::history</name>
             </application>
           </applications>
           <valuemap/>
@@ -1481,13 +2008,12 @@ A high number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Size of free trend cache.&#13;
-&#13;
+          <description>Size of free trends cache.&#13;
 A low number indicates performance problems on the database side.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::trend</name>
             </application>
           </applications>
           <valuemap/>
@@ -1524,13 +2050,12 @@ A low number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Percent of free terend cache.&#13;
-&#13;
+          <description>Percent of the tends cache free space.&#13;
 A low number indicates performance problems on the database side.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::trend</name>
             </application>
           </applications>
           <valuemap/>
@@ -1567,11 +2092,11 @@ A low number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Total size of free trend cache.</description>
+          <description>Total size of the trends cache.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::trend</name>
             </application>
           </applications>
           <valuemap/>
@@ -1608,13 +2133,12 @@ A low number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description>Size of used trend cache.&#13;
-&#13;
+          <description>Size of used trends cache.&#13;
 A high number indicates performance problems on the database side.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::trend</name>
             </application>
           </applications>
           <valuemap/>
@@ -1651,11 +2175,11 @@ A high number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Total number of values per second processed by Zabbix server except unsupported items.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::values</name>
             </application>
           </applications>
           <valuemap/>
@@ -1697,11 +2221,11 @@ A high number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Total number of values per second processed by Zabbix server except unsupported items.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::values</name>
             </application>
           </applications>
           <valuemap/>
@@ -1743,11 +2267,11 @@ A high number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Number of log values per second processed by Zabbix server.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::values</name>
             </application>
           </applications>
           <valuemap/>
@@ -1789,11 +2313,11 @@ A high number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Number of all item per second which processing resulted in item becoming unsupported or keeping that state by Zabbix server.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::values</name>
             </application>
           </applications>
           <valuemap/>
@@ -1835,11 +2359,11 @@ A high number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Number of character/string values per second processed by Zabbix server.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::values</name>
             </application>
           </applications>
           <valuemap/>
@@ -1881,11 +2405,11 @@ A high number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Number of text values per second processed by Zabbix server.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::values</name>
             </application>
           </applications>
           <valuemap/>
@@ -1927,11 +2451,11 @@ A high number indicates performance problems on the database side.</description>
           <publickey/>
           <privatekey/>
           <port/>
-          <description/>
+          <description>Number of unsigned integer values per second processed by Zabbix server.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Server</name>
+              <name>SVC::Zabbix Server::wcache::values</name>
             </application>
           </applications>
           <valuemap/>
@@ -1954,7 +2478,7 @@ A high number indicates performance problems on the database side.</description>
         <screen>
           <name>SVC::zabbix_server::status</name>
           <hsize>2</hsize>
-          <vsize>3</vsize>
+          <vsize>5</vsize>
           <screen_items>
             <screen_item>
               <resourcetype>0</resourcetype>
@@ -2060,7 +2584,7 @@ A high number indicates performance problems on the database side.</description>
               <dynamic>0</dynamic>
               <sort_triggers>0</sort_triggers>
               <resource>
-                <name>SVC::zabbix_server::items queued</name>
+                <name>SVC::zabbix_server::preprocessing queue</name>
                 <host>Service Zabbix Server</host>
               </resource>
               <max_columns>3</max_columns>
@@ -2082,7 +2606,95 @@ A high number indicates performance problems on the database side.</description>
               <dynamic>0</dynamic>
               <sort_triggers>0</sort_triggers>
               <resource>
+                <name>SVC::zabbix_server::items queued</name>
+                <host>Service Zabbix Server</host>
+              </resource>
+              <max_columns>3</max_columns>
+              <application/>
+            </screen_item>
+            <screen_item>
+              <resourcetype>0</resourcetype>
+              <width>500</width>
+              <height>100</height>
+              <x>0</x>
+              <y>3</y>
+              <colspan>1</colspan>
+              <rowspan>1</rowspan>
+              <elements>0</elements>
+              <valign>1</valign>
+              <halign>1</halign>
+              <style>0</style>
+              <url/>
+              <dynamic>0</dynamic>
+              <sort_triggers>0</sort_triggers>
+              <resource>
                 <name>SVC::zabbix_server::items total/unsupported</name>
+                <host>Service Zabbix Server</host>
+              </resource>
+              <max_columns>3</max_columns>
+              <application/>
+            </screen_item>
+            <screen_item>
+              <resourcetype>0</resourcetype>
+              <width>500</width>
+              <height>100</height>
+              <x>1</x>
+              <y>3</y>
+              <colspan>1</colspan>
+              <rowspan>1</rowspan>
+              <elements>0</elements>
+              <valign>1</valign>
+              <halign>1</halign>
+              <style>0</style>
+              <url/>
+              <dynamic>0</dynamic>
+              <sort_triggers>0</sort_triggers>
+              <resource>
+                <name>SVC::zabbix_server::items::nvps</name>
+                <host>Service Zabbix Server</host>
+              </resource>
+              <max_columns>3</max_columns>
+              <application/>
+            </screen_item>
+            <screen_item>
+              <resourcetype>0</resourcetype>
+              <width>500</width>
+              <height>100</height>
+              <x>0</x>
+              <y>4</y>
+              <colspan>1</colspan>
+              <rowspan>1</rowspan>
+              <elements>0</elements>
+              <valign>1</valign>
+              <halign>1</halign>
+              <style>0</style>
+              <url/>
+              <dynamic>0</dynamic>
+              <sort_triggers>0</sort_triggers>
+              <resource>
+                <name>SVC::zabbix_server::items/triggers</name>
+                <host>Service Zabbix Server</host>
+              </resource>
+              <max_columns>3</max_columns>
+              <application/>
+            </screen_item>
+            <screen_item>
+              <resourcetype>0</resourcetype>
+              <width>500</width>
+              <height>100</height>
+              <x>1</x>
+              <y>4</y>
+              <colspan>1</colspan>
+              <rowspan>1</rowspan>
+              <elements>0</elements>
+              <valign>1</valign>
+              <halign>1</halign>
+              <style>0</style>
+              <url/>
+              <dynamic>0</dynamic>
+              <sort_triggers>0</sort_triggers>
+              <resource>
+                <name>SVC::zabbix_server::hosts</name>
                 <host>Service Zabbix Server</host>
               </resource>
               <max_columns>3</max_columns>
@@ -2095,10 +2707,26 @@ A high number indicates performance problems on the database side.</description>
   </templates>
   <triggers>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"alerter",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,alerter,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::alerter processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,alert manager,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::alert manager processes &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2159,7 +2787,7 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"configuration syncer",avg,busy].avg(1m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,configuration syncer,avg,busy].avg(1m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::configuration syncer processes &gt;=75% busy</name>
@@ -2175,10 +2803,26 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"discoverer",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,discoverer,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::discoverer processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,escalator,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::escalator processes &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2239,7 +2883,7 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"history syncer",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,history syncer,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::history syncer processes &gt;=75% busy</name>
@@ -2255,7 +2899,7 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"housekeeper",avg,busy].avg(20m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,housekeeper,avg,busy].avg(20m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::housekeeper processes &gt;=75% busy</name>
@@ -2271,7 +2915,7 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"http poller",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,http poller,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::http poller processes &gt;=75% busy</name>
@@ -2287,10 +2931,42 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"icmp pinger",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,icmp pinger,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::ICMP pinger processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,ipmi manager,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::ipmi manager processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,ipmi poller,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::ipmi poller processes &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2373,7 +3049,23 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"poller",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,java poller,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::java poller processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,poller,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::poller processes &gt;=75% busy</name>
@@ -2389,7 +3081,55 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"self-monitoring",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,preprocessing manager,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::preprocessing manager processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,preprocessing worker,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::preprocessing worker processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,proxy poller,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::proxy poller processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,self-monitoring,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::self-monitoring processes &gt;=75% busy</name>
@@ -2405,7 +3145,55 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"trapper",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,snmp trapper,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::snmp trapper processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,task manager,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::task manager processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,timer,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::timer processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,trapper,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::trapper processes &gt;=75% busy</name>
@@ -2421,10 +3209,26 @@ A high number indicates performance problems on the database side.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Server:zabbix[process,"unreachable poller",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Server:zabbix[process,unreachable poller,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::zabbix_server::unreachable poller processes &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Server:zabbix[process,vmware collector,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_server::vmware collector processes &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2440,8 +3244,8 @@ A high number indicates performance problems on the database side.</description>
   <graphs>
     <graph>
       <name>SVC::zabbix_server::caches usage %</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -2507,9 +3311,41 @@ A high number indicates performance problems on the database side.</description>
       </graph_items>
     </graph>
     <graph>
+      <name>SVC::zabbix_server::hosts</name>
+      <width>1200</width>
+      <height>300</height>
+      <yaxismin>0.0000</yaxismin>
+      <yaxismax>100.0000</yaxismax>
+      <show_work_period>1</show_work_period>
+      <show_triggers>0</show_triggers>
+      <type>0</type>
+      <show_legend>1</show_legend>
+      <show_3d>0</show_3d>
+      <percent_left>0.0000</percent_left>
+      <percent_right>0.0000</percent_right>
+      <ymin_type_1>1</ymin_type_1>
+      <ymax_type_1>0</ymax_type_1>
+      <ymin_item_1>0</ymin_item_1>
+      <ymax_item_1>0</ymax_item_1>
+      <graph_items>
+        <graph_item>
+          <sortorder>0</sortorder>
+          <drawtype>2</drawtype>
+          <color>33FF33</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>7</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Server</host>
+            <key>zabbix[hosts]</key>
+          </item>
+        </graph_item>
+      </graph_items>
+    </graph>
+    <graph>
       <name>SVC::zabbix_server::internal process busy %</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -2533,7 +3369,7 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"housekeeper",avg,busy]</key>
+            <key>zabbix[process,housekeeper,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -2545,7 +3381,7 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"alerter",avg,busy]</key>
+            <key>zabbix[process,alerter,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -2557,11 +3393,11 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"configuration syncer",avg,busy]</key>
+            <key>zabbix[process,configuration syncer,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>4</sortorder>
+          <sortorder>3</sortorder>
           <drawtype>2</drawtype>
           <color>EE0000</color>
           <yaxisside>0</yaxisside>
@@ -2569,11 +3405,11 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"history syncer",avg,busy]</key>
+            <key>zabbix[process,history syncer,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>5</sortorder>
+          <sortorder>4</sortorder>
           <drawtype>2</drawtype>
           <color>FF66FF</color>
           <yaxisside>0</yaxisside>
@@ -2581,15 +3417,15 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"self-monitoring",avg,busy]</key>
+            <key>zabbix[process,self-monitoring,avg,busy]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
-      <name>SVC::zabbix_server::items/wcache::buffer::pfree</name>
-      <width>900</width>
-      <height>400</height>
+      <name>SVC::zabbix_server::items/triggers</name>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -2599,17 +3435,17 @@ A high number indicates performance problems on the database side.</description>
       <show_3d>0</show_3d>
       <percent_left>0.0000</percent_left>
       <percent_right>0.0000</percent_right>
-      <ymin_type_1>0</ymin_type_1>
+      <ymin_type_1>1</ymin_type_1>
       <ymax_type_1>0</ymax_type_1>
       <ymin_item_1>0</ymin_item_1>
       <ymax_item_1>0</ymax_item_1>
       <graph_items>
         <graph_item>
           <sortorder>0</sortorder>
-          <drawtype>0</drawtype>
-          <color>00BB00</color>
+          <drawtype>2</drawtype>
+          <color>EE0000</color>
           <yaxisside>0</yaxisside>
-          <calc_fnc>2</calc_fnc>
+          <calc_fnc>7</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
@@ -2619,21 +3455,53 @@ A high number indicates performance problems on the database side.</description>
         <graph_item>
           <sortorder>1</sortorder>
           <drawtype>0</drawtype>
-          <color>FFFF33</color>
+          <color>00DD00</color>
           <yaxisside>0</yaxisside>
-          <calc_fnc>2</calc_fnc>
+          <calc_fnc>7</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[vcache,buffer,pfree]</key>
+            <key>zabbix[triggers]</key>
+          </item>
+        </graph_item>
+      </graph_items>
+    </graph>
+    <graph>
+      <name>SVC::zabbix_server::items::nvps</name>
+      <width>1200</width>
+      <height>300</height>
+      <yaxismin>0.0000</yaxismin>
+      <yaxismax>100.0000</yaxismax>
+      <show_work_period>1</show_work_period>
+      <show_triggers>0</show_triggers>
+      <type>0</type>
+      <show_legend>1</show_legend>
+      <show_3d>0</show_3d>
+      <percent_left>0.0000</percent_left>
+      <percent_right>0.0000</percent_right>
+      <ymin_type_1>1</ymin_type_1>
+      <ymax_type_1>0</ymax_type_1>
+      <ymin_item_1>0</ymin_item_1>
+      <ymax_item_1>0</ymax_item_1>
+      <graph_items>
+        <graph_item>
+          <sortorder>0</sortorder>
+          <drawtype>2</drawtype>
+          <color>FF3333</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>7</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Server</host>
+            <key>zabbix[requiredperformance]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::zabbix_server::items queued</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -2712,8 +3580,8 @@ A high number indicates performance problems on the database side.</description>
     </graph>
     <graph>
       <name>SVC::zabbix_server::items total/unsupported</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -2755,9 +3623,41 @@ A high number indicates performance problems on the database side.</description>
       </graph_items>
     </graph>
     <graph>
+      <name>SVC::zabbix_server::preprocessing queue</name>
+      <width>1200</width>
+      <height>300</height>
+      <yaxismin>0.0000</yaxismin>
+      <yaxismax>100.0000</yaxismax>
+      <show_work_period>1</show_work_period>
+      <show_triggers>1</show_triggers>
+      <type>0</type>
+      <show_legend>1</show_legend>
+      <show_3d>0</show_3d>
+      <percent_left>0.0000</percent_left>
+      <percent_right>0.0000</percent_right>
+      <ymin_type_1>0</ymin_type_1>
+      <ymax_type_1>0</ymax_type_1>
+      <ymin_item_1>0</ymin_item_1>
+      <ymax_item_1>0</ymax_item_1>
+      <graph_items>
+        <graph_item>
+          <sortorder>0</sortorder>
+          <drawtype>5</drawtype>
+          <color>1A7C11</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>7</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Server</host>
+            <key>zabbix[preprocessing_queue]</key>
+          </item>
+        </graph_item>
+      </graph_items>
+    </graph>
+    <graph>
       <name>SVC::zabbix_server::process busy %</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -2781,23 +3681,35 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"trapper",avg,busy]</key>
+            <key>zabbix[process,trapper,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
           <sortorder>1</sortorder>
-          <drawtype>2</drawtype>
+          <drawtype>0</drawtype>
           <color>990000</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"poller",avg,busy]</key>
+            <key>zabbix[process,poller,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
           <sortorder>2</sortorder>
+          <drawtype>0</drawtype>
+          <color>0000EE</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Server</host>
+            <key>zabbix[process,ipmi poller,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>3</sortorder>
           <drawtype>0</drawtype>
           <color>FF33FF</color>
           <yaxisside>0</yaxisside>
@@ -2805,23 +3717,23 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"discoverer",avg,busy]</key>
+            <key>zabbix[process,discoverer,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>3</sortorder>
+          <sortorder>4</sortorder>
           <drawtype>0</drawtype>
-          <color>00EE00</color>
+          <color>009600</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"icmp pinger",avg,busy]</key>
+            <key>zabbix[process,icmp pinger,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>4</sortorder>
+          <sortorder>5</sortorder>
           <drawtype>0</drawtype>
           <color>003300</color>
           <yaxisside>0</yaxisside>
@@ -2829,11 +3741,23 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"http poller",avg,busy]</key>
+            <key>zabbix[process,http poller,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>5</sortorder>
+          <sortorder>6</sortorder>
+          <drawtype>0</drawtype>
+          <color>CCCC00</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Server</host>
+            <key>zabbix[process,proxy poller,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>7</sortorder>
           <drawtype>0</drawtype>
           <color>33FFFF</color>
           <yaxisside>0</yaxisside>
@@ -2841,27 +3765,51 @@ A high number indicates performance problems on the database side.</description>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"unreachable poller",avg,busy]</key>
+            <key>zabbix[process,unreachable poller,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>6</sortorder>
+          <sortorder>8</sortorder>
           <drawtype>0</drawtype>
-          <color>C8C8C8</color>
+          <color>DD0000</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Server</host>
-            <key>zabbix[process,"proxy poller",avg,busy]</key>
+            <key>zabbix[process,java poller,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>9</sortorder>
+          <drawtype>0</drawtype>
+          <color>000099</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Server</host>
+            <key>zabbix[process,snmp trapper,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>10</sortorder>
+          <drawtype>0</drawtype>
+          <color>00FF00</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Server</host>
+            <key>zabbix[process,vmware collector,avg,busy]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::zabbix_server::vcache::hits/misses</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>

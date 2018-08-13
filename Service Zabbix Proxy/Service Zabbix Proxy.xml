@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.4</version>
-  <date>2017-12-10T04:56:50Z</date>
+  <date>2018-06-11T11:39:04Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -13,11 +13,11 @@
       <name>Service Zabbix Proxy</name>
       <description>Base Zabbix proxy service monitoring template.&#13;
 &#13;
-Version: 1.0.0 (2017-09-09)&#13;
+Version: 1.0.4 (2018-06-11)&#13;
 URL: https://github.com/kloczek/zabbix-templates/tree/master/Service%20Zabbix%20Proxy&#13;
 &#13;
 Notes:&#13;
-* Host with this template needs to be monitored over proxy which will be monitored.</description>
+* Host with this template must be monitored over proxy which will be monitored.</description>
       <groups>
         <group>
           <name>Templates</name>
@@ -32,6 +32,9 @@ Notes:&#13;
         </application>
         <application>
           <name>SVC::Zabbix Proxy</name>
+        </application>
+        <application>
+          <name>SVC::Zabbix Proxy::proc</name>
         </application>
       </applications>
       <items>
@@ -241,11 +244,93 @@ Notes:&#13;
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"discoverer",avg,busy]</key>
+          <key>zabbix[process,configuration syncer,avg,busy]</key>
+          <delay>1m</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Proxy::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,data sender,avg,busy]</key>
+          <delay>1m</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Proxy::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,discoverer,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -273,7 +358,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -283,11 +368,52 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"history syncer",avg,busy]</key>
+          <key>zabbix[process,heartbeat sender,avg,busy]</key>
+          <delay>1m</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Proxy::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,history syncer,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -315,7 +441,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -325,11 +451,11 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"housekeeper",avg,busy]</key>
+          <key>zabbix[process,housekeeper,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -357,7 +483,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -367,11 +493,11 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"http poller",avg,busy]</key>
+          <key>zabbix[process,http poller,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -399,7 +525,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -409,11 +535,11 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"icmp pinger",avg,busy]</key>
+          <key>zabbix[process,icmp pinger,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -441,7 +567,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -451,11 +577,134 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"poller",avg,busy]</key>
+          <key>zabbix[process,ipmi manager,avg,busy]</key>
+          <delay>1m</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Proxy::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,ipmi poller,avg,busy]</key>
+          <delay>1m</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Proxy::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,java poller,avg,busy]</key>
+          <delay>1m</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Proxy::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,poller,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -483,7 +732,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -493,11 +742,11 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"self-monitoring",avg,busy]</key>
+          <key>zabbix[process,self-monitoring,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -525,7 +774,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -535,11 +784,94 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"trapper",avg,busy]</key>
+          <key>zabbix[process,snmp trapper,avg,busy]</key>
+          <delay>1m</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Proxy::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,task manager,avg,busy]</key>
+          <delay>30s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>0</value_type>
+          <allowed_hosts/>
+          <units>%</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Average percent of the time of the "task manager" process is busy during the last minute.&#13;
+"task manager" process is responsible for executing remote command tasks.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::Zabbix Proxy::proc</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
+          <name>proc::$4::$2</name>
+          <type>5</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>zabbix[process,trapper,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -567,7 +899,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -577,11 +909,11 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"unreachable poller",avg,busy]</key>
+          <key>zabbix[process,unreachable poller,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -609,7 +941,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -619,11 +951,11 @@ It is calculated for last minute only.</description>
           <master_item/>
         </item>
         <item>
-          <name>Processes::$4::$2</name>
+          <name>proc::$4::$2</name>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[process,"vmware collector",avg,busy]</key>
+          <key>zabbix[process,vmware collector,avg,busy]</key>
           <delay>30s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -651,7 +983,7 @@ It is calculated for last minute only.</description>
           <inventory_link>0</inventory_link>
           <applications>
             <application>
-              <name>SVC::Zabbix Proxy</name>
+              <name>SVC::Zabbix Proxy::proc</name>
             </application>
           </applications>
           <valuemap/>
@@ -1123,7 +1455,7 @@ It is calculated for last minute only.</description>
           <status>0</status>
           <value_type>0</value_type>
           <allowed_hosts/>
-          <units>nv/s</units>
+          <units>nvps</units>
           <snmpv3_contextname/>
           <snmpv3_securityname/>
           <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -1526,137 +1858,14 @@ It is calculated for last minute only.</description>
           <type>5</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>zabbix[wcache,text,free]</key>
-          <delay>30s</delay>
-          <history>2w</history>
-          <trends>365d</trends>
-          <status>0</status>
-          <value_type>3</value_type>
-          <allowed_hosts/>
-          <units>B</units>
-          <snmpv3_contextname/>
-          <snmpv3_securityname/>
-          <snmpv3_securitylevel>0</snmpv3_securitylevel>
-          <snmpv3_authprotocol>0</snmpv3_authprotocol>
-          <snmpv3_authpassphrase/>
-          <snmpv3_privprotocol>0</snmpv3_privprotocol>
-          <snmpv3_privpassphrase/>
-          <params/>
-          <ipmi_sensor/>
-          <authtype>0</authtype>
-          <username/>
-          <password/>
-          <publickey/>
-          <privatekey/>
-          <port/>
-          <description/>
-          <inventory_link>0</inventory_link>
-          <applications>
-            <application>
-              <name>SVC::Zabbix Proxy</name>
-            </application>
-          </applications>
-          <valuemap/>
-          <logtimefmt/>
-          <preprocessing/>
-          <jmx_endpoint/>
-          <master_item/>
-        </item>
-        <item>
-          <name>$1::$2::$3</name>
-          <type>5</type>
-          <snmp_community/>
-          <snmp_oid/>
-          <key>zabbix[wcache,text,pfree]</key>
-          <delay>30s</delay>
+          <key>zabbix[wcache,index,pfree]</key>
+          <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
           <status>0</status>
           <value_type>0</value_type>
           <allowed_hosts/>
           <units>%</units>
-          <snmpv3_contextname/>
-          <snmpv3_securityname/>
-          <snmpv3_securitylevel>0</snmpv3_securitylevel>
-          <snmpv3_authprotocol>0</snmpv3_authprotocol>
-          <snmpv3_authpassphrase/>
-          <snmpv3_privprotocol>0</snmpv3_privprotocol>
-          <snmpv3_privpassphrase/>
-          <params/>
-          <ipmi_sensor/>
-          <authtype>0</authtype>
-          <username/>
-          <password/>
-          <publickey/>
-          <privatekey/>
-          <port/>
-          <description/>
-          <inventory_link>0</inventory_link>
-          <applications>
-            <application>
-              <name>SVC::Zabbix Proxy</name>
-            </application>
-          </applications>
-          <valuemap/>
-          <logtimefmt/>
-          <preprocessing/>
-          <jmx_endpoint/>
-          <master_item/>
-        </item>
-        <item>
-          <name>$1::$2::$3</name>
-          <type>5</type>
-          <snmp_community/>
-          <snmp_oid/>
-          <key>zabbix[wcache,text,total]</key>
-          <delay>1h</delay>
-          <history>2w</history>
-          <trends>365d</trends>
-          <status>0</status>
-          <value_type>3</value_type>
-          <allowed_hosts/>
-          <units>B</units>
-          <snmpv3_contextname/>
-          <snmpv3_securityname/>
-          <snmpv3_securitylevel>0</snmpv3_securitylevel>
-          <snmpv3_authprotocol>0</snmpv3_authprotocol>
-          <snmpv3_authpassphrase/>
-          <snmpv3_privprotocol>0</snmpv3_privprotocol>
-          <snmpv3_privpassphrase/>
-          <params/>
-          <ipmi_sensor/>
-          <authtype>0</authtype>
-          <username/>
-          <password/>
-          <publickey/>
-          <privatekey/>
-          <port/>
-          <description/>
-          <inventory_link>0</inventory_link>
-          <applications>
-            <application>
-              <name>SVC::Zabbix Proxy</name>
-            </application>
-          </applications>
-          <valuemap/>
-          <logtimefmt/>
-          <preprocessing/>
-          <jmx_endpoint/>
-          <master_item/>
-        </item>
-        <item>
-          <name>$1::$2::$3</name>
-          <type>5</type>
-          <snmp_community/>
-          <snmp_oid/>
-          <key>zabbix[wcache,text,used]</key>
-          <delay>30s</delay>
-          <history>2w</history>
-          <trends>365d</trends>
-          <status>0</status>
-          <value_type>3</value_type>
-          <allowed_hosts/>
-          <units>B</units>
           <snmpv3_contextname/>
           <snmpv3_securityname/>
           <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -2211,6 +2420,70 @@ It is calculated for last minute only.</description>
       <tags/>
     </trigger>
     <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,configuration syncer,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::configuration syncer &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,data sender,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::data sender &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,discoverer,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::discoverer &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,heartbeat sender,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::heartbeat sender &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
       <expression>{Service Zabbix Proxy:zabbix[wcache,history,pfree].avg(5m)}&lt;5</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
@@ -2265,70 +2538,16 @@ It is calculated for last minute only.</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"history syncer",avg,busy].avg(600)}&gt;75</expression>
+      <expression>{Service Zabbix Proxy:zabbix[process,history syncer,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::zabbix_proxy::history syncer processes more than 75% busy</name>
+      <name>SVC::zabbix_proxy::history syncer &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
-      <status>1</status>
+      <status>0</status>
       <priority>3</priority>
       <description/>
-      <type>0</type>
-      <manual_close>0</manual_close>
-      <dependencies/>
-      <tags/>
-    </trigger>
-    <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[wcache,text,pfree].avg(5m)}&lt;5</expression>
-      <recovery_mode>0</recovery_mode>
-      <recovery_expression/>
-      <name>SVC::zabbix_proxy::HistoryTextCacheSize {ITEM.VALUE} free (&lt; 5%)</name>
-      <correlation_mode>0</correlation_mode>
-      <correlation_tag/>
-      <url/>
-      <status>0</status>
-      <priority>5</priority>
-      <description>Consider increasing HistoryTextCacheSize in the /etc/zabbix/zabbix_proxy/HistoryTextCacheSize file.</description>
-      <type>0</type>
-      <manual_close>0</manual_close>
-      <dependencies/>
-      <tags/>
-    </trigger>
-    <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[wcache,text,pfree].avg(5m)}&lt;15</expression>
-      <recovery_mode>0</recovery_mode>
-      <recovery_expression/>
-      <name>SVC::zabbix_proxy::HistoryTextCacheSize {ITEM.VALUE} free (&lt; 15%)</name>
-      <correlation_mode>0</correlation_mode>
-      <correlation_tag/>
-      <url/>
-      <status>0</status>
-      <priority>3</priority>
-      <description>Consider increasing HistoryTextCacheSize in the /etc/zabbix/zabbix_proxy/HistoryTextCacheSize file.</description>
-      <type>0</type>
-      <manual_close>0</manual_close>
-      <dependencies>
-        <dependency>
-          <name>SVC::zabbix_proxy::HistoryTextCacheSize {ITEM.VALUE} free (&lt; 5%)</name>
-          <expression>{Service Zabbix Proxy:zabbix[wcache,text,pfree].avg(5m)}&lt;5</expression>
-          <recovery_expression/>
-        </dependency>
-      </dependencies>
-      <tags/>
-    </trigger>
-    <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[wcache,text,pfree].avg(30m)}&gt;80</expression>
-      <recovery_mode>0</recovery_mode>
-      <recovery_expression/>
-      <name>SVC::zabbix_proxy::HistoryTextCacheSize {ITEM.VALUE} free (&gt; 80%)</name>
-      <correlation_mode>0</correlation_mode>
-      <correlation_tag/>
-      <url/>
-      <status>1</status>
-      <priority>1</priority>
-      <description>Consider decrease HistoryTextCacheSize in the /etc/zabbix/zabbix_proxy/HistoryTextCacheSize file.</description>
       <type>0</type>
       <manual_close>0</manual_close>
       <dependencies/>
@@ -2349,6 +2568,102 @@ It is calculated for last minute only.</description>
 499:20131203:021029.181 Sending list of active checks to [172.16.18.193] failed: host [app001.aci100.uk3.ribob01.net] not found&#13;
 &#13;
 This means that a host may be failing to auto-register, subsequently we will have no monitoring data for this host and manual intervention is required to get it into monitoring.</description>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,housekeeper,avg,busy].avg(30m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::housekeeper &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,http poller,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::http poller &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,icmp pinger,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::ICMP pinger &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,ipmi manager,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::ipmi manager &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,ipmi poller,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::ipmi poller &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{Service Zabbix Proxy:zabbix[process,java poller,avg,busy].avg(10m)}&gt;75</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::zabbix_proxy::java poller &gt;=75% busy</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
       <type>0</type>
       <manual_close>0</manual_close>
       <dependencies/>
@@ -2439,10 +2754,10 @@ Possible:&#13;
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"discoverer",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Proxy:zabbix[process,poller,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::zabbix_proxy::process::discoverer &gt;=75% bus</name>
+      <name>SVC::zabbix_proxy::poller &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2455,10 +2770,10 @@ Possible:&#13;
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"housekeeper",avg,busy].avg(30m)}&gt;75</expression>
+      <expression>{Service Zabbix Proxy:zabbix[process,self-monitoring,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::zabbix_proxy::process::housekeeper &gt;=75% busy</name>
+      <name>SVC::zabbix_proxy::self-monitoring &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2471,10 +2786,10 @@ Possible:&#13;
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"http poller",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Proxy:zabbix[process,snmp trapper,avg,busy].avg(30m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::zabbix_proxy::process::http poller &gt;=75% busy</name>
+      <name>SVC::zabbix_proxy::snmp trapper &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2487,10 +2802,10 @@ Possible:&#13;
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"icmp pinger",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Proxy:zabbix[process,task manager,avg,busy].avg(30m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::zabbix_proxy::process::ICMP pinger &gt;=75% busy</name>
+      <name>SVC::zabbix_proxy::task manager &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2503,10 +2818,10 @@ Possible:&#13;
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"poller",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Proxy:zabbix[process,trapper,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::zabbix_proxy::process::poller &gt;=75% busy</name>
+      <name>SVC::zabbix_proxy::trapper &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2519,10 +2834,10 @@ Possible:&#13;
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"self-monitoring",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Proxy:zabbix[process,unreachable poller,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::zabbix_proxy::process::self-monitoring &gt;=75% busy</name>
+      <name>SVC::zabbix_proxy::unreachable poller &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2535,26 +2850,10 @@ Possible:&#13;
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"trapper",avg,busy].avg(10m)}&gt;75</expression>
+      <expression>{Service Zabbix Proxy:zabbix[process,vmware collector,avg,busy].avg(10m)}&gt;75</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::zabbix_proxy::process::trapper &gt;=75% busy</name>
-      <correlation_mode>0</correlation_mode>
-      <correlation_tag/>
-      <url/>
-      <status>0</status>
-      <priority>3</priority>
-      <description/>
-      <type>0</type>
-      <manual_close>0</manual_close>
-      <dependencies/>
-      <tags/>
-    </trigger>
-    <trigger>
-      <expression>{Service Zabbix Proxy:zabbix[process,"unreachable poller",avg,busy].avg(10m)}&gt;75</expression>
-      <recovery_mode>0</recovery_mode>
-      <recovery_expression/>
-      <name>SVC::zabbix_proxy::process::unreachable poller &gt;=75% busy</name>
+      <name>SVC::zabbix_proxy::vmware collector &gt;=75% busy</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -2586,11 +2885,11 @@ Possible:&#13;
   <graphs>
     <graph>
       <name>SVC::zabbix_proxy::cache usage %</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
-      <show_work_period>0</show_work_period>
+      <show_work_period>1</show_work_period>
       <show_triggers>1</show_triggers>
       <type>0</type>
       <show_legend>1</show_legend>
@@ -2604,7 +2903,7 @@ Possible:&#13;
       <graph_items>
         <graph_item>
           <sortorder>0</sortorder>
-          <drawtype>2</drawtype>
+          <drawtype>0</drawtype>
           <color>DD0000</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
@@ -2616,19 +2915,19 @@ Possible:&#13;
         </graph_item>
         <graph_item>
           <sortorder>1</sortorder>
-          <drawtype>2</drawtype>
+          <drawtype>0</drawtype>
           <color>00DDDD</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[wcache,text,pfree]</key>
+            <key>zabbix[wcache,index,pfree]</key>
           </item>
         </graph_item>
         <graph_item>
           <sortorder>2</sortorder>
-          <drawtype>2</drawtype>
+          <drawtype>0</drawtype>
           <color>3333FF</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
@@ -2642,8 +2941,8 @@ Possible:&#13;
     </graph>
     <graph>
       <name>SVC::zabbix_proxy::database items</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>0</show_work_period>
@@ -2686,8 +2985,8 @@ Possible:&#13;
     </graph>
     <graph>
       <name>SVC::zabbix_proxy::data gathering process busy %</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -2711,23 +3010,35 @@ Possible:&#13;
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"trapper",avg,busy]</key>
+            <key>zabbix[process,trapper,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
           <sortorder>1</sortorder>
-          <drawtype>2</drawtype>
+          <drawtype>0</drawtype>
           <color>990000</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"poller",avg,busy]</key>
+            <key>zabbix[process,poller,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
           <sortorder>2</sortorder>
+          <drawtype>0</drawtype>
+          <color>0000EE</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Proxy</host>
+            <key>zabbix[process,ipmi poller,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>3</sortorder>
           <drawtype>0</drawtype>
           <color>FF33FF</color>
           <yaxisside>0</yaxisside>
@@ -2735,11 +3046,11 @@ Possible:&#13;
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"discoverer",avg,busy]</key>
+            <key>zabbix[process,discoverer,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>3</sortorder>
+          <sortorder>4</sortorder>
           <drawtype>0</drawtype>
           <color>00EE00</color>
           <yaxisside>0</yaxisside>
@@ -2747,11 +3058,11 @@ Possible:&#13;
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"icmp pinger",avg,busy]</key>
+            <key>zabbix[process,icmp pinger,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>4</sortorder>
+          <sortorder>5</sortorder>
           <drawtype>0</drawtype>
           <color>003300</color>
           <yaxisside>0</yaxisside>
@@ -2759,11 +3070,11 @@ Possible:&#13;
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"http poller",avg,busy]</key>
+            <key>zabbix[process,http poller,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>5</sortorder>
+          <sortorder>6</sortorder>
           <drawtype>0</drawtype>
           <color>33FFFF</color>
           <yaxisside>0</yaxisside>
@@ -2771,15 +3082,39 @@ Possible:&#13;
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"unreachable poller",avg,busy]</key>
+            <key>zabbix[process,unreachable poller,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>7</sortorder>
+          <drawtype>0</drawtype>
+          <color>DD0000</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Proxy</host>
+            <key>zabbix[process,java poller,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>8</sortorder>
+          <drawtype>0</drawtype>
+          <color>000099</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>7</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Proxy</host>
+            <key>zabbix[process,snmp trapper,avg,busy]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::zabbix_proxy::history buffers % free</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>0</show_work_period>
@@ -2810,8 +3145,8 @@ Possible:&#13;
     </graph>
     <graph>
       <name>SVC::zabbix_proxy::internal process busy %</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -2828,58 +3163,106 @@ Possible:&#13;
       <graph_items>
         <graph_item>
           <sortorder>0</sortorder>
-          <drawtype>2</drawtype>
+          <drawtype>0</drawtype>
           <color>FFAA00</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"housekeeper",avg,busy]</key>
+            <key>zabbix[process,housekeeper,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
           <sortorder>1</sortorder>
-          <drawtype>2</drawtype>
+          <drawtype>0</drawtype>
+          <color>990099</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Proxy</host>
+            <key>zabbix[process,configuration syncer,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>2</sortorder>
+          <drawtype>0</drawtype>
           <color>EE0000</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"history syncer",avg,busy]</key>
+            <key>zabbix[process,history syncer,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>2</sortorder>
-          <drawtype>2</drawtype>
+          <sortorder>3</sortorder>
+          <drawtype>0</drawtype>
           <color>FF66FF</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"self-monitoring",avg,busy]</key>
+            <key>zabbix[process,self-monitoring,avg,busy]</key>
           </item>
         </graph_item>
         <graph_item>
-          <sortorder>3</sortorder>
-          <drawtype>2</drawtype>
-          <color>0000CC</color>
+          <sortorder>4</sortorder>
+          <drawtype>0</drawtype>
+          <color>960000</color>
           <yaxisside>0</yaxisside>
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
             <host>Service Zabbix Proxy</host>
-            <key>zabbix[process,"vmware collector",avg,busy]</key>
+            <key>zabbix[process,heartbeat sender,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>5</sortorder>
+          <drawtype>0</drawtype>
+          <color>009600</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Proxy</host>
+            <key>zabbix[process,data sender,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>6</sortorder>
+          <drawtype>0</drawtype>
+          <color>009999</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Proxy</host>
+            <key>zabbix[process,task manager,avg,busy]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>7</sortorder>
+          <drawtype>0</drawtype>
+          <color>BBBB00</color>
+          <yaxisside>0</yaxisside>
+          <calc_fnc>2</calc_fnc>
+          <type>0</type>
+          <item>
+            <host>Service Zabbix Proxy</host>
+            <key>zabbix[process,ipmi manager,avg,busy]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::zabbix_proxy::items queued</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>0</show_work_period>
@@ -2958,8 +3341,8 @@ Possible:&#13;
     </graph>
     <graph>
       <name>SVC::zabbix_proxy::VMWare Collector buffers % free</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>0</show_work_period>

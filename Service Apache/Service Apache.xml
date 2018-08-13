@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.4</version>
-  <date>2017-12-13T13:32:27Z</date>
+  <date>2018-06-11T11:38:49Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -13,7 +13,7 @@
       <name>Service Apache</name>
       <description>Apache service monitoring template using zabbix active agent items.&#13;
 &#13;
-Version : 1.0.1 (2017-12-01)&#13;
+Version : 1.0.4 (2018-06-11)&#13;
 URL: https://github.com/kloczek/zabbix-templates/tree/master/Service%20Apache&#13;
 &#13;
 Notes:&#13;
@@ -39,7 +39,7 @@ ExtendedStatus On&#13;
       </applications>
       <items>
         <item>
-          <name>Network::service::$1</name>
+          <name>SVC::$1</name>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
@@ -82,7 +82,7 @@ ExtendedStatus On&#13;
           <master_item/>
         </item>
         <item>
-          <name>SYS::process::$1</name>
+          <name>PROC::$1</name>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
@@ -516,26 +516,10 @@ Possible values:&#13;
   </templates>
   <triggers>
     <trigger>
-      <expression>{Service Apache:net.tcp.service[http,,{$HTTP_SERVICE_PORT}].max(#3)}=0</expression>
-      <recovery_mode>0</recovery_mode>
-      <recovery_expression/>
-      <name>SVC:httpd:Server is down</name>
-      <correlation_mode>0</correlation_mode>
-      <correlation_tag/>
-      <url/>
-      <status>0</status>
-      <priority>3</priority>
-      <description/>
-      <type>0</type>
-      <manual_close>0</manual_close>
-      <dependencies/>
-      <tags/>
-    </trigger>
-    <trigger>
       <expression>{Service Apache:proc.num[httpd].min(#3)}&gt;100</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC:httpd:Too many httpd processes running (LV={ITEM.LASTVALUE})</name>
+      <name>PROC::httpd::too many processes running ({ITEM.LASTVALUE} processes)</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -551,7 +535,7 @@ Possible values:&#13;
       <expression>{Service Apache:proc.num[httpd].max(#8)}=0</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SYS::processes::httpd is not running</name>
+      <name>PROC::httpd is not running</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
@@ -563,12 +547,28 @@ Possible values:&#13;
       <dependencies/>
       <tags/>
     </trigger>
+    <trigger>
+      <expression>{Service Apache:net.tcp.service[http,,{$HTTP_SERVICE_PORT}].max(#3)}=0</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>SVC::http tcp/{$HTTP_SERVICE_PORT} is DOWN</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>3</priority>
+      <description>Nothing listens on http tcp/{$HTTP_SERVICE_PORT} port or traffic on this port is filtered by firewall.</description>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
   </triggers>
   <graphs>
     <graph>
       <name>SVC::Apache::processes</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -599,8 +599,8 @@ Possible values:&#13;
     </graph>
     <graph>
       <name>SVC::Apache::requests</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -631,8 +631,8 @@ Possible values:&#13;
     </graph>
     <graph>
       <name>SVC::Apache::workers</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>

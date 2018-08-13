@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.4</version>
-  <date>2017-12-15T15:05:33Z</date>
+  <date>2018-06-11T11:38:51Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -11,12 +11,13 @@
     <template>
       <template>Service MySQL</template>
       <name>Service MySQL</name>
-      <description>Active agent monitoring of the MySQL engine.&#13;
+      <description>MySQL engine monitoring over Zabbix agent.&#13;
 &#13;
+Version: 1.0.4 (2018-06-11)&#13;
 URL: https://github.com/kloczek/zabbix-templates/tree/master/Service%20MySQL&#13;
-Version: 1.0.3 (2017-11-30)&#13;
+&#13;
 Notes:&#13;
-* Tested on MySQL 5.7 and it not uses MySQL 5.6 backward compatibility so it can be used to monitor MySQL engine which in my.cnf has:&#13;
+* Tested on MySQL 5.7 and it not designed to be uses with MySQL older than 5.7 backward compatibility so it can be used to monitor MySQL engine which in my.cnf has:&#13;
 &#13;
 [mysqld]&#13;
 show_compatibility_56 = OFF &#13;
@@ -430,178 +431,6 @@ http://dev.mysql.com/doc/refman/5.7/en/innodb-information-schema.html</descripti
           <master_item/>
         </item>
         <item>
-          <name>show_compatibility_56</name>
-          <type>7</type>
-          <snmp_community/>
-          <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "SELECT variable_name= FROM performance_schema.global_status WHERE variable_name='show_compatibility_56'",]</key>
-          <delay>1h</delay>
-          <history>2w</history>
-          <trends>0</trends>
-          <status>0</status>
-          <value_type>1</value_type>
-          <allowed_hosts/>
-          <units/>
-          <snmpv3_contextname/>
-          <snmpv3_securityname/>
-          <snmpv3_securitylevel>0</snmpv3_securitylevel>
-          <snmpv3_authprotocol>0</snmpv3_authprotocol>
-          <snmpv3_authpassphrase/>
-          <snmpv3_privprotocol>0</snmpv3_privprotocol>
-          <snmpv3_privpassphrase/>
-          <params/>
-          <ipmi_sensor/>
-          <authtype>0</authtype>
-          <username/>
-          <password/>
-          <publickey/>
-          <privatekey/>
-          <port/>
-          <description>When show_compatibility_56 is OFF, compatibility with MySQL 5.6 is disabled and several changes result.</description>
-          <inventory_link>0</inventory_link>
-          <applications>
-            <application>
-              <name>SVC::MySQL::cfg</name>
-            </application>
-          </applications>
-          <valuemap/>
-          <logtimefmt/>
-          <preprocessing/>
-          <jmx_endpoint/>
-          <master_item/>
-        </item>
-        <item>
-          <name>Threads_cached</name>
-          <type>7</type>
-          <snmp_community/>
-          <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "SELECT variable_name FROM performance_schema.global_status where variable_name='Threads_cached';",]</key>
-          <delay>20s</delay>
-          <history>2w</history>
-          <trends>365d</trends>
-          <status>0</status>
-          <value_type>3</value_type>
-          <allowed_hosts/>
-          <units>threads</units>
-          <snmpv3_contextname/>
-          <snmpv3_securityname/>
-          <snmpv3_securitylevel>0</snmpv3_securitylevel>
-          <snmpv3_authprotocol>0</snmpv3_authprotocol>
-          <snmpv3_authpassphrase/>
-          <snmpv3_privprotocol>0</snmpv3_privprotocol>
-          <snmpv3_privpassphrase/>
-          <params/>
-          <ipmi_sensor/>
-          <authtype>0</authtype>
-          <username/>
-          <password/>
-          <publickey/>
-          <privatekey/>
-          <port/>
-          <description>The number of threads in the thread cache.&#13;
-&#13;
-This variable is not meaningful in the embedded server (libmysqld) and as of MySQL 5.7.2 is no longer visible within the embedded server.</description>
-          <inventory_link>0</inventory_link>
-          <applications>
-            <application>
-              <name>SVC::MySQL::threads</name>
-            </application>
-          </applications>
-          <valuemap/>
-          <logtimefmt/>
-          <preprocessing/>
-          <jmx_endpoint/>
-          <master_item/>
-        </item>
-        <item>
-          <name>Threads_running</name>
-          <type>7</type>
-          <snmp_community/>
-          <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "SELECT variable_name FROM performance_schema.global_status WHERE variable_name='Threads_running';",]</key>
-          <delay>20s</delay>
-          <history>2w</history>
-          <trends>365d</trends>
-          <status>0</status>
-          <value_type>3</value_type>
-          <allowed_hosts/>
-          <units>threads</units>
-          <snmpv3_contextname/>
-          <snmpv3_securityname/>
-          <snmpv3_securitylevel>0</snmpv3_securitylevel>
-          <snmpv3_authprotocol>0</snmpv3_authprotocol>
-          <snmpv3_authpassphrase/>
-          <snmpv3_privprotocol>0</snmpv3_privprotocol>
-          <snmpv3_privpassphrase/>
-          <params/>
-          <ipmi_sensor/>
-          <authtype>0</authtype>
-          <username/>
-          <password/>
-          <publickey/>
-          <privatekey/>
-          <port/>
-          <description>The number of threads that are not sleeping.</description>
-          <inventory_link>0</inventory_link>
-          <applications>
-            <application>
-              <name>SVC::MySQL::threads</name>
-            </application>
-          </applications>
-          <valuemap/>
-          <logtimefmt/>
-          <preprocessing/>
-          <jmx_endpoint/>
-          <master_item/>
-        </item>
-        <item>
-          <name>binlog_format</name>
-          <type>7</type>
-          <snmp_community/>
-          <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='binlog_format'",]</key>
-          <delay>1h</delay>
-          <history>2w</history>
-          <trends>0</trends>
-          <status>0</status>
-          <value_type>1</value_type>
-          <allowed_hosts/>
-          <units/>
-          <snmpv3_contextname/>
-          <snmpv3_securityname/>
-          <snmpv3_securitylevel>0</snmpv3_securitylevel>
-          <snmpv3_authprotocol>0</snmpv3_authprotocol>
-          <snmpv3_authpassphrase/>
-          <snmpv3_privprotocol>0</snmpv3_privprotocol>
-          <snmpv3_privpassphrase/>
-          <params/>
-          <ipmi_sensor/>
-          <authtype>0</authtype>
-          <username/>
-          <password/>
-          <publickey/>
-          <privatekey/>
-          <port/>
-          <description>Default: STATEMENT&#13;
-&#13;
-This variable sets the binary logging format, and can be any one of STATEMENT, ROW, or MIXED.&#13;
-&#13;
-- STATEMENT causes logging to be statement based&#13;
-- ROW causes logging to be row based&#13;
-- MIXED causes logging to use mixed format</description>
-          <inventory_link>0</inventory_link>
-          <applications>
-            <application>
-              <name>SVC::MySQL::cfg</name>
-            </application>
-          </applications>
-          <valuemap/>
-          <logtimefmt/>
-          <preprocessing/>
-          <jmx_endpoint/>
-          <master_item/>
-        </item>
-        <item>
           <name>Bytes_received</name>
           <type>7</type>
           <snmp_community/>
@@ -698,7 +527,7 @@ This variable sets the binary logging format, and can be any one of STATEMENT, R
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Connections';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Connections';",]</key>
           <delay>20s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -744,7 +573,7 @@ This variable sets the binary logging format, and can be any one of STATEMENT, R
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Created_tmp_disk_tables';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Created_tmp_disk_tables';",]</key>
           <delay>20s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -794,7 +623,7 @@ You can compare the number of internal on-disk temporary tables created to the t
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Created_tmp_files';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Created_tmp_files';",]</key>
           <delay>20s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -840,7 +669,7 @@ You can compare the number of internal on-disk temporary tables created to the t
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Created_tmp_tables';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Created_tmp_tables';",]</key>
           <delay>20s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -890,7 +719,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_bytes_data';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_bytes_data';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -931,7 +760,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_bytes_dirty';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_bytes_dirty';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -972,7 +801,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_data';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_data';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1013,7 +842,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_dirty';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_dirty';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1054,7 +883,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_flushed';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_flushed';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1100,7 +929,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_free';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_free';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1141,7 +970,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_misc';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_misc';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1182,7 +1011,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_total';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_total';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1223,7 +1052,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_reads';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_reads';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1269,7 +1098,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_read_requests';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_read_requests';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1315,7 +1144,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_write_requests';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_write_requests';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1361,7 +1190,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_data_fsyncs';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_data_fsyncs';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1407,7 +1236,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_data_pending_fsyncs';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_data_pending_fsyncs';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1448,7 +1277,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_data_pending_reads';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_data_pending_reads';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1489,7 +1318,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_data_pending_writes';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_data_pending_writes';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1530,7 +1359,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_data_read';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_data_read';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1576,7 +1405,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_data_writes';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_data_writes';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1617,7 +1446,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_log_waits';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_log_waits';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1663,7 +1492,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_log_write_requests';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_log_write_requests';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1709,7 +1538,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_os_log_written';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_os_log_written';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1755,7 +1584,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_rows_inserted';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_rows_inserted';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1801,7 +1630,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_rows_read';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_rows_read';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1847,7 +1676,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_rows_updated';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_rows_updated';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1893,7 +1722,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_row_lock_time_avg';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_row_lock_time_avg';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1939,7 +1768,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_row_lock_waits';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_row_lock_waits';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -1985,7 +1814,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_free_blocks'",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_free_blocks'",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2026,7 +1855,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_free_memory'",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_free_memory'",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2067,7 +1896,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_hits'",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_hits'",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2113,7 +1942,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_inserts'",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_inserts'",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2159,7 +1988,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_lowmem_prunes'",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_lowmem_prunes'",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2205,7 +2034,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_not_cached'",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_not_cached'",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2251,7 +2080,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_queries_in_cache'",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_queries_in_cache'",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2292,7 +2121,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_total_blocks'",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_total_blocks'",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2333,7 +2162,7 @@ Each invocation of the SHOW STATUS statement uses an internal temporary table an
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Queries';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Queries';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2381,7 +2210,7 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Select_scan';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Select_scan';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2427,7 +2256,7 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Slow_queries';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Slow_queries';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2469,11 +2298,54 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <master_item/>
         </item>
         <item>
+          <name>Threads_cached</name>
+          <type>7</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_cached';",]</key>
+          <delay>20s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <allowed_hosts/>
+          <units>threads</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>The number of threads in the thread cache.&#13;
+&#13;
+This variable is not meaningful in the embedded server (libmysqld) and as of MySQL 5.7.2 is no longer visible within the embedded server.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::MySQL::threads</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
           <name>Threads_connected</name>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Threads_connected';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_connected';",]</key>
           <delay>20s</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2514,7 +2386,7 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Threads_created';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_created';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2551,11 +2423,52 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <master_item/>
         </item>
         <item>
+          <name>Threads_running</name>
+          <type>7</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_running';",]</key>
+          <delay>20s</delay>
+          <history>2w</history>
+          <trends>365d</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <allowed_hosts/>
+          <units>threads</units>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>The number of threads that are not sleeping.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::MySQL::threads</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
           <name>Uptime</name>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Uptime';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Uptime';",]</key>
           <delay>1m</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2592,11 +2505,58 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <master_item/>
         </item>
         <item>
+          <name>binlog_format</name>
+          <type>7</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='binlog_format'",]</key>
+          <delay>1h</delay>
+          <history>2w</history>
+          <trends>0</trends>
+          <status>0</status>
+          <value_type>1</value_type>
+          <allowed_hosts/>
+          <units/>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>Default: STATEMENT&#13;
+&#13;
+This variable sets the binary logging format, and can be any one of STATEMENT, ROW, or MIXED.&#13;
+&#13;
+- STATEMENT causes logging to be statement based&#13;
+- ROW causes logging to be row based&#13;
+- MIXED causes logging to use mixed format</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::MySQL::cfg</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
           <name>event_scheduler</name>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='event_scheduler';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='event_scheduler';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>0</trends>
@@ -2643,7 +2603,7 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='innodb_max_dirty_pages_pct';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='innodb_max_dirty_pages_pct';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2684,7 +2644,7 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='innodb_open_files';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='innodb_open_files';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2725,7 +2685,7 @@ It does not count COM_PING or COM_STATISTICS commands.</description>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='innodb_page_size';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='innodb_page_size';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2768,7 +2728,7 @@ The default, with the largest page size, is appropriate for a wide range of work
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='innodb_support_xa';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='innodb_support_xa';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>0</trends>
@@ -2813,7 +2773,7 @@ You can also turn off this option if you do not need it for safe binary logging 
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='long_query_time';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='long_query_time';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2854,7 +2814,7 @@ You can also turn off this option if you do not need it for safe binary logging 
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='max_allowed_packet';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='max_allowed_packet';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2901,7 +2861,7 @@ When you change the message buffer size by changing the value of the max_allowed
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='max_connections';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='max_connections';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2942,7 +2902,7 @@ When you change the message buffer size by changing the value of the max_allowed
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='max_heap_table_size';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='max_heap_table_size';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -2985,7 +2945,7 @@ This variable is also used in conjunction with tmp_table_size to limit the size 
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='open_files_limit';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='open_files_limit';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -3026,7 +2986,7 @@ This variable is also used in conjunction with tmp_table_size to limit the size 
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='query_cache_size';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='query_cache_size';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -3071,7 +3031,7 @@ The query cache needs a minimum size of about 40KB to allocate its structures. (
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='query_cache_type';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='query_cache_type';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>0</trends>
@@ -3113,11 +3073,52 @@ Possible values:&#13;
           <master_item/>
         </item>
         <item>
+          <name>show_compatibility_56</name>
+          <type>7</type>
+          <snmp_community/>
+          <snmp_oid/>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='show_compatibility_56'",]</key>
+          <delay>1h</delay>
+          <history>2w</history>
+          <trends>0</trends>
+          <status>0</status>
+          <value_type>1</value_type>
+          <allowed_hosts/>
+          <units/>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <params/>
+          <ipmi_sensor/>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description>When show_compatibility_56 is OFF, compatibility with MySQL 5.6 is disabled and several changes result.</description>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>SVC::MySQL::cfg</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+          <preprocessing/>
+          <jmx_endpoint/>
+          <master_item/>
+        </item>
+        <item>
           <name>tmp_table_size</name>
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='tmp_table_size';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='tmp_table_size';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>365d</trends>
@@ -3160,7 +3161,7 @@ You can compare the number of internal on-disk temporary tables created to the t
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='tx_isolation';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='tx_isolation';",]</key>
           <delay>1h</delay>
           <history>2w</history>
           <trends>0</trends>
@@ -3225,7 +3226,7 @@ This level is like REPEATABLE READ, but InnoDB implicitly converts all plain SEL
           <type>7</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='version';",]</key>
+          <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='version';",]</key>
           <delay>1d</delay>
           <history>2w</history>
           <trends>0</trends>
@@ -3307,7 +3308,7 @@ This level is like REPEATABLE READ, but InnoDB implicitly converts all plain SEL
               <type>7</type>
               <snmp_community/>
               <snmp_oid/>
-              <key>system.run[{$MYSQL_CMD} "select SUM(DATA_LENGTH) from information_schema.TABLES where TABLE_SCHEMA='{#DB}';",]</key>
+              <key>system.run[{$MYSQL_CMD} "SELECT SUM(data_length) FROM information_schema.tables WHERE table_schema='{#DB}';",]</key>
               <delay>1m</delay>
               <history>2w</history>
               <trends>365d</trends>
@@ -3349,7 +3350,7 @@ This level is like REPEATABLE READ, but InnoDB implicitly converts all plain SEL
               <type>7</type>
               <snmp_community/>
               <snmp_oid/>
-              <key>system.run[{$MYSQL_CMD} "select SUM(INDEX_LENGTH) from information_schema.TABLES where TABLE_SCHEMA='{#DB}';",]</key>
+              <key>system.run[{$MYSQL_CMD} "SELECT SUM(index_length) FROM information_schema.tables WHERE table_schema='{#DB}';",]</key>
               <delay>1m</delay>
               <history>2w</history>
               <trends>365d</trends>
@@ -3391,8 +3392,8 @@ This level is like REPEATABLE READ, but InnoDB implicitly converts all plain SEL
           <graph_prototypes>
             <graph_prototype>
               <name>SVC::MySQL::{#DB}::data &amp; index size</name>
-              <width>900</width>
-              <height>400</height>
+              <width>1200</width>
+              <height>300</height>
               <yaxismin>0.0000</yaxismin>
               <yaxismax>100.0000</yaxismax>
               <show_work_period>1</show_work_period>
@@ -3416,7 +3417,7 @@ This level is like REPEATABLE READ, but InnoDB implicitly converts all plain SEL
                   <type>0</type>
                   <item>
                     <host>Service MySQL</host>
-                    <key>system.run[{$MYSQL_CMD} "select SUM(DATA_LENGTH) from information_schema.TABLES where TABLE_SCHEMA='{#DB}';",]</key>
+                    <key>system.run[{$MYSQL_CMD} "SELECT SUM(data_length) FROM information_schema.tables WHERE table_schema='{#DB}';",]</key>
                   </item>
                 </graph_item>
                 <graph_item>
@@ -3428,7 +3429,7 @@ This level is like REPEATABLE READ, but InnoDB implicitly converts all plain SEL
                   <type>0</type>
                   <item>
                     <host>Service MySQL</host>
-                    <key>system.run[{$MYSQL_CMD} "select SUM(INDEX_LENGTH) from information_schema.TABLES where TABLE_SCHEMA='{#DB}';",]</key>
+                    <key>system.run[{$MYSQL_CMD} "SELECT SUM(index_length) FROM information_schema.tables WHERE table_schema='{#DB}';",]</key>
                   </item>
                 </graph_item>
               </graph_items>
@@ -3796,7 +3797,7 @@ SELECT variable_value FROM information_schema.global_status WHERE variable_name 
               <dynamic>0</dynamic>
               <sort_triggers>0</sort_triggers>
               <resource>
-                <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Threads_created';",]</key>
+                <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_created';",]</key>
                 <host>Service MySQL</host>
               </resource>
               <max_columns>3</max_columns>
@@ -3818,7 +3819,7 @@ SELECT variable_value FROM information_schema.global_status WHERE variable_name 
               <dynamic>0</dynamic>
               <sort_triggers>0</sort_triggers>
               <resource>
-                <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Connections';",]</key>
+                <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Connections';",]</key>
                 <host>Service MySQL</host>
               </resource>
               <max_columns>3</max_columns>
@@ -3831,10 +3832,10 @@ SELECT variable_value FROM information_schema.global_status WHERE variable_name 
   </templates>
   <triggers>
     <trigger>
-      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "SELECT variable_name= FROM performance_schema.global_status WHERE variable_name='show_compatibility_56'",].str(OFF)}=1</expression>
+      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='show_compatibility_56'",].str(ON)}=1</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>SVC::MySQL::cfg::show_compatibility_56=OFF</name>
+      <name>SVC::MySQL::cfg::show_compatibility_56=ON</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url>https://dev.mysql.com/doc/refman/5.7/en/performance-schema-variable-table-migration.html</url>
@@ -3849,7 +3850,7 @@ This template requires show_compatibility_56=OFF</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='event_scheduler';",].str(OFF)}=1</expression>
+      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='event_scheduler';",].str(OFF)}=1</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::MySQL::event_scheduler=OFF</name>
@@ -3873,8 +3874,8 @@ SET GLOBAL event_scheduler = ON;</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Threads_connected';",].last()} &gt;=&#13;
-{Service MySQL:system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='max_connections';",].last()}*0.9</expression>
+      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_connected';",].last()} &gt;=&#13;
+{Service MySQL:system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='max_connections';",].last()}*0.9</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::MySQL::Threads_connected &gt;= 90% max_connection</name>
@@ -3897,7 +3898,7 @@ max_connections = &lt;new_limit&gt;</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='version';",].diff()}&gt;0</expression>
+      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='version';",].diff()}&gt;0</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::MySQL::version has changed to {ITEM.LASTVALUE}</name>
@@ -3913,7 +3914,7 @@ max_connections = &lt;new_limit&gt;</description>
       <tags/>
     </trigger>
     <trigger>
-      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Uptime';",].last(0)}&lt;30m</expression>
+      <expression>{Service MySQL:system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Uptime';",].last(0)}&lt;30m</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>SVC::mysqld process has been restarted {ITEM.LASTVALUE} ago</name>
@@ -3949,8 +3950,8 @@ Possible restart has been done.</description>
   <graphs>
     <graph>
       <name>SVC::MySQL::bytes:in/out</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -3993,8 +3994,8 @@ Possible restart has been done.</description>
     </graph>
     <graph>
       <name>SVC::MySQL::Com</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -4085,8 +4086,8 @@ Possible restart has been done.</description>
     </graph>
     <graph>
       <name>SVC::MySQL::Connections</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -4110,7 +4111,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Threads_connected';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_connected';",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4122,15 +4123,15 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_variables where VARIABLE_NAME='max_connections';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_variables WHERE variable_name='max_connections';",]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::MySQL::pages</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -4154,7 +4155,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_data';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_data';",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4166,7 +4167,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_free';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_free';",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4178,15 +4179,15 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Innodb_buffer_pool_pages_dirty';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Innodb_buffer_pool_pages_dirty';",]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::MySQL::QChache:hits/misses</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -4210,7 +4211,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_hits'",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_hits'",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4222,15 +4223,15 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Qcache_queries_in_cache'",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Qcache_queries_in_cache'",]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::MySQL::Queries</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -4254,7 +4255,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Queries';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Queries';",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4266,15 +4267,15 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Slow_queries';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Slow_queries';",]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::MySQL::threads</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -4298,7 +4299,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Threads_connected';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_connected';",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4310,7 +4311,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "SELECT variable_name FROM performance_schema.global_status WHERE variable_name='Threads_running';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_running';",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4322,15 +4323,15 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "SELECT variable_name FROM performance_schema.global_status where variable_name='Threads_cached';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Threads_cached';",]</key>
           </item>
         </graph_item>
       </graph_items>
     </graph>
     <graph>
       <name>SVC::MySQL::tmp tables</name>
-      <width>900</width>
-      <height>400</height>
+      <width>1200</width>
+      <height>300</height>
       <yaxismin>0.0000</yaxismin>
       <yaxismax>100.0000</yaxismax>
       <show_work_period>1</show_work_period>
@@ -4354,7 +4355,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Created_tmp_disk_tables';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Created_tmp_disk_tables';",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4366,7 +4367,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Created_tmp_files';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Created_tmp_files';",]</key>
           </item>
         </graph_item>
         <graph_item>
@@ -4378,7 +4379,7 @@ Possible restart has been done.</description>
           <type>0</type>
           <item>
             <host>Service MySQL</host>
-            <key>system.run[{$MYSQL_CMD} "select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME='Created_tmp_tables';",]</key>
+            <key>system.run[{$MYSQL_CMD} "SELECT variable_value FROM performance_schema.global_status WHERE variable_name='Created_tmp_tables';",]</key>
           </item>
         </graph_item>
       </graph_items>

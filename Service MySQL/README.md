@@ -1,26 +1,30 @@
-Active agent monitoring of the MySQL engine.
+#### Version: 1.0.4 (2018-06-11)
 
-Version: 1.0.3 (2017-11-30)
+#### Description:
+MySQL engine monitoring over Zabbix agent.
 
-Changelog:
-- 1.0.4 (not reeaed yet):
-  - added applications (improved gouping metrics in "Last data" view):
-    - SVC::MySQL::cfg for all read configuration parameters
-    - SVC::MySQL::Com for all Com_* metrics
-    - SVC::MySQL::DB::{#DB} prototype for all per database metrics 
-    - SVC::MySQL::innodb for all innodb storage engine metrics
-    - SVC::MySQL::threads for all treads related metrics
-  - added graphs:
-    - SVC::MySQL::threads with: Threads_cached, Threads_connected and Threads_running metrics
-  - added metrics:
-    - max_allowed_packet - the maximum size of one packet or any generated/intermediate string
-    - show_compatibility_56 - show is MySQL engine working in MySQL 5.6 compatibility mode is ON/OFF
-    - Threads_cached - the number of threads in the thread cache
-    - Threads_running - the number of threads that are not sleeping
-  - added screens:
-    - SVC::MySQL::threads with SVC::MySQL::threads (graph) and Connections (simple greph)
-  - added triggers:
-    - SVC::MySQL::version has been changed (severity: Not classified)
+#### Changelog:
+- 1.0.4 (2018-06-11):
+  - Applications:
+    - new ```SVC::MySQL::cfg``` for all read configuration parameters
+    - new ```SVC::MySQL::Com``` for all Com_* metrics
+    - new ```SVC::MySQL::DB::{#DB}``` prototype for all per database metrics 
+    - new ```SVC::MySQL::innodb``` for all innodb storage engine metrics
+    - new ```SVC::MySQL::threads``` for all treads related metrics
+  - Graphs:
+    - new ```SVC::MySQL::threads``` with ```Threads_cached```, ```Threads_connected``` and ```Threads_running``` metrics
+    - changed resolution of all graphs to 1200x300
+  - Items:
+    - new ```max_allowed_packet``` - the maximum size of one packet or any generated/intermediate string
+    - new ```show_compatibility_56``` - show is MySQL engine running in MySQL 5.6 compatibility mode is ON/OFF
+    - new ```Threads_cached``` - the number of threads in the thread cache
+    - mew ```Threads_running``` - the number of threads that are not sleeping
+    - rewrite most of the items SQL queries to use uppercase SQL keywords and lowercase for table names and row names (this will cause problems with imprt new template but I need to standarize thuis before first officially announced release of the templates)
+  - Screens:
+    - new ```SVC::MySQL::thread```s which combines ```SVC::MySQL::threads``` graph and ```Connections``` simple graph
+  - Triggers:
+    - new ```SVC::MySQL::version``` has been changed (severity: Not classified)
+    - new ```SVC::MySQL::cfg::show_compatibility_56=ON``` (severity: High, because this template requires show_compatibility_56=OFF)
 - 1.0.3 (2017-11-30):
   - fix: added missing "^" in MySQL::DB filter which has been causing not filter off information_schema, mysql, performance_schema and sys databases
   - template Changelog no longer maintained in template description
@@ -32,9 +36,9 @@ Changelog:
 - 1.0.1:
   - added missing entries in SVC::MySQL::Queries screen
 - 1.0.0:
-  - initial version
+  - initial version.
 
-Notes:
+#### Notes:
 - Tested on MySQL 5.7 and it not uses MySQL 5.6 backward compatibility.  The
   template requires to disable MySQL 5.6 backward compatibility and it will
   raise alarm that show_compatibility_56 is OFF. To disable MySQL 5.6
