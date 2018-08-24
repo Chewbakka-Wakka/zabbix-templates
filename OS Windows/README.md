@@ -7,6 +7,7 @@ Base OS Windows template.
 - (devel)
   - Triggers:
     - added missing ```SYS::Host is down``` trigger with all necessary dependencies
+    - added SVC LLDs
 - 1.0.4 (2018-06-11)
   - Triggers:
     - rename trigger name to the same name as it is in other OS templates
